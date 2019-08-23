@@ -4,6 +4,7 @@ const jwt=require('jsonwebtoken')
 const bcrypt=require('bcrypt')
 
 
+
 route.get('/user',async(req,res)=>{
    try{
     const user= await User.find({})
@@ -17,6 +18,7 @@ route.get('/user',async(req,res)=>{
 
 route.post('/register',async(req,res)=>{
     // check if user exist
+    console.log(req.body)
     const emailexists=await User.findOne(
         {email:req.body.email}
     )
@@ -27,7 +29,8 @@ route.post('/register',async(req,res)=>{
     
     try{
         await user.save()
-        res.status(201).send(user)
+        // res.status(201).send(user)
+        res.redirect('/')
     }
     catch(e){
         res.status(400).send(e)
@@ -45,7 +48,8 @@ route.post('/user/login', async (req, res) => {
             if(!isMatch) return res.status(400).send('Wrong password')
             
             const token=jwt.sign({_id:user._id},"diksha");
-            res.header('auth-token',token).send(user)
+            res.header('auth-token',token).send("hello")
+            
     
         }
         catch(e){

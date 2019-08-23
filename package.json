@@ -12,8 +12,10 @@
   "dependencies": {
     "bcrypt": "^3.0.6",
     "express": "^4.17.1",
+    "hbs": "^4.0.4",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.6.10",
+    "path": "^0.12.7",
     "validator": "^11.1.0"
   }
 }
