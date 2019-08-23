@@ -1,5 +1,8 @@
 const route=require('express').Router()
 const User=require('../model/user')
+const jwt=require('jsonwebtoken')
+const bcrypt=require('bcrypt')
+
 
 route.get('/user',async(req,res)=>{
    try{
@@ -12,9 +15,16 @@ route.get('/user',async(req,res)=>{
  
 })
 
-route.post('/user',async(req,res)=>{
+route.post('/register',async(req,res)=>{
+    // check if user exist
+    const emailexists=await User.findOne(
+        {email:req.body.email}
+    )
+    if(emailexists) return res.status(400).send('Email already exist.Try with new one!!!')
+
+    //creating new user
     const user=new User(req.body)
-    console.log(req.body)
+    
     try{
         await user.save()
         res.status(201).send(user)
@@ -25,12 +35,27 @@ route.post('/user',async(req,res)=>{
 })
 
 route.post('/user/login', async (req, res) => {
-    try {
-        const user = await User.findByCredentials(req.body.email, req.body.password)
-        res.send(user)
-    } catch (e) {
-        res.status(400).send(e)
-    }
+        
+        // const user = await User.findByCredentials(req.body.email, req.body.password)
+        try{
+            const user= await User.findOne({email:req.body.email})
+            if(!user) return res.status(400).send('Invalid Email')
+    
+            const isMatch = await bcrypt.compare(req.body.password, user.password)
+            if(!isMatch) return res.status(400).send('Wrong password')
+            
+            const token=jwt.sign({_id:user._id},"diksha");
+            res.header('auth-token',token).send(user)
+    
+        }
+        catch(e){
+            console.log(e)
+        }
+
+        
+
+
+    
 })
 
 
@@ -72,6 +97,7 @@ route.delete('/user/:id',async(req,res)=>{
         res.status(500).send()
     }
 })
+
 
 
 module.exports=route
