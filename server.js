@@ -16,7 +16,7 @@ app.set('view engine','hbs')
 
 app.use(UserRoute)
 app.use(CheckAuthentication)
-app.set('/',express.static(path.join(__dirname,'/public')))
+app.use('/',express.static(path.join(__dirname,'/public')))
 
 app.get('/',(req,res)=>{
     res.render('index')
@@ -26,6 +26,9 @@ app.get('/signup',(req,res)=>{
 })
 app.get('/login',(req,res)=>{
     res.render('login')
+})
+app.get('/allcontacts',(req,res)=>{
+    res.render('allcontacts')
 })
 
 app.listen('9000',()=>{

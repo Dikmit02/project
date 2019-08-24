@@ -48,7 +48,7 @@ route.post('/user/login', async (req, res) => {
             if(!isMatch) return res.status(400).send('Wrong password')
             
             const token=jwt.sign({_id:user._id},"diksha");
-            res.header('auth-token',token).send("hello")
+            res.header('auth-token',token).redirect("/allcontacts")
             
     
         }
