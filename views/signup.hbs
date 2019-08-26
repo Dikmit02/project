@@ -5,20 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+     <script src="/src/signup.js"></script>
+
 </head>
 <body>
-        {{!-- <input type="text" placeholder="name" name="name"> NAme
-    </form> --}}
-    <form action="/register" method="post">
+   
+    <form method="POST" action="/register" >
    Username:<br>
-  <input type="text" name="name" >
+  <input id="username" required type="text" name="name" >
   <br>
   Email:<br>
-  <input type="email" name="email" >
+  <input id="email"type="email" required name="email" >
   <br>
   
   Password:<br>
-  <input type="password" name="password">
+  <input id="password" type="password" required name="password">
   
   <br><br>
   <input type="submit" value="Submit">

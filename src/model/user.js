@@ -34,23 +34,7 @@ const userSchema = new mongoose.Schema({
 
     }
     // ,
-    // age:{
-    //     type:Number,
-    //     default:0,
-    //     required:true,
-    //     validate(value){
-    //         if(value<0){
-    //             throw new Error("Age cannot be negative")
-    //         }
-    //     }
-            
-            
-    // },
-    // department:{
-    //     type:String,
-    //     require:true,
-    //     minlength:3
-    // }
+     
 })
 // userSchema.statics.findByCredentials = async (email, password) => {
 //     const user = await User.findOne({ email })

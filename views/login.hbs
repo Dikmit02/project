@@ -6,21 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js">
+    </script><script src="/src/ajaxrequest.js"></script>
+    
     <script src="/src/script.js"></script>
     
 </head>
 <body>
     
-    <form action="/user/login" method="post">
+    <form action="/user/login" method="POST" id="login">
   
   <br>
   Email:<br>
-  <input type="email" name="email" >
+  <input id="email" required type="email" name="email" >
   <br>
   
   Password:<br>
-  <input type="password" name="password">
+  <input id="password" required type="password" name="password">
   
   <br><br>
   <input type="submit" value="Submit">
