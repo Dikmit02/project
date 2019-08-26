@@ -40,19 +40,17 @@ route.post('/user/login', async (req, res) => {
             const isMatch = await bcrypt.compare(req.body.password, user.password)
             if(!isMatch) return res.send({status:false,error:'Wrong password'})
             
+
             const token=jwt.sign({_id:user._id},"diksha");
-            res.header('auth-token',token).send({status:true})
+            // res.header('auth-token',token).send({status:true})
+            res.cookie('authtoken',token,{httpOnly:true})
             
+            res.send({status:true})
     
         }
         catch(e){
             console.log(e)
         }
-
-        
-
-
-    
 })
 
 

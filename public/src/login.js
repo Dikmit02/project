@@ -22,7 +22,7 @@ $(function(){
     $('form').submit((event)=>{
        
         event.preventDefault()
-        const name=$('#username').val()
+       
         const email=$('#email').val()
         const password=$('#password').val()   
         
@@ -30,9 +30,11 @@ $(function(){
             $.post('/user/login',{email,password},(data)=>{
                 if(!data.status){
                     alert(data.error)
+                    window.location='http://localhost:9000/signup'
                 }
                 else{
-                    window.location='http://localhost:9000/allcontacts'
+                   alert("login successfull")
+                   window.location='http://localhost:9000/'
                 }
             })
 

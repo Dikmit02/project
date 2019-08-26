@@ -1,20 +1,20 @@
-const route=require('express').Router()
-const veriftyFunction=require('./verifyToken')
-const User=require('./src/model/user')
+// const route=require('express').Router()
+// const veriftyFunction=require('./verifyToken')
+// const User=require('./src/model/user')
 
-route.get('/verfied',veriftyFunction,async (req,res)=>{
-    // res.send(req.user)
-    // contains the authenticate obj
-    try{
+// route.get('/verfied',veriftyFunction,async (req,res)=>{
+//     // res.send(req.user)
+//     // contains the authenticate obj
+//     try{
         
-        const user =await  User.findById(req.user._id)
+//         const user =await  User.findById(req.user._id)
         
-        res.send(user)
+//         res.send(user)
       
-    }
-    catch(e){
-        res.status(400).send('ok')
-    }
-})
+//     }
+//     catch(e){
+//         res.status(400).send('ok')
+//     }
+// })
 
-module.exports=route
+// module.exports=route
