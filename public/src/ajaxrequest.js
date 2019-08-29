@@ -6,3 +6,12 @@ function fetchUser(done){
 }
 
 
+function getUserId(member_id){
+
+    $.post('/conversation',{
+        members:[member_id]
+    },function(data){
+       
+        done(data)
+    })
+}

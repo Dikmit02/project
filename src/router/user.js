@@ -2,7 +2,7 @@ const route=require('express').Router()
 const User=require('../model/user')
 const jwt=require('jsonwebtoken')
 const bcrypt=require('bcrypt')
-let  userid=0
+var  userid=0
 
 
 route.get('/user',async(req,res)=>{
@@ -44,7 +44,8 @@ route.post('/user/login', async (req, res) => {
             const token=jwt.sign({_id:user._id},"diksha",{ expiresIn: '7d' },);
             // res.header('auth-token',token).send({status:true})
             res.cookie('authtoken',token,{httpOnly:true})
-            userid=user._id           
+            userid=user._id
+            
             res.send({status:true})
     
         }
@@ -57,5 +58,4 @@ route.post('/user/login', async (req, res) => {
 
 
 
-module.exports={route,
-    userid}
+module.exports={route}

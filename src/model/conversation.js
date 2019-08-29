@@ -1,9 +1,9 @@
 const mongoose=require('mongoose')
-var ObjectId = mongoose.Schema.ObjectId;
+
 const ConversationSchema=new mongoose.Schema({
  
     members:{
-        type:[ObjectId],
+        type:[String],
         required:true
 
     }

@@ -1,11 +1,16 @@
 const express=require('express')
 require('./mongoose/mongoose')
 const path=require('path')
+const hbs=require('hbs')
 const jwt=require('jsonwebtoken')
+const socketio=require('socket.io')
+const http=require('http')
 
 const cookieParser=require('cookie-parser');
 
 const app=express()
+const server=http.createServer(app)
+const io=socketio(server)
 
 const UserRoute=require('./src/router/user')
 const ConversationRoute=require('./src/router/conversation')
@@ -16,6 +21,7 @@ app.use(cookieParser())
 
 
 app.set('view engine','hbs')
+hbs.registerPartials(path.join(__dirname,'/partials'))
 
 app.use(UserRoute.route)
 app.use(ConversationRoute)
@@ -48,10 +54,8 @@ function verify(req,res,next){
     try{
         
         const payload=jwt.verify(token,"diksha")
-        
         if(!payload)
         {
-            
             return res.render('index')
         }
         req.user=payload
@@ -64,6 +68,23 @@ function verify(req,res,next){
     next()
 }
 
-app.listen('9000',()=>{
+io.on('connection', (socket) => {
+
+    
+
+    // Handle chat event
+    socket.on('chat', function(data){
+        
+        io.emit('chat', data);
+    });
+
+    // Handle typing event
+    socket.on('typing', function(data){
+        socket.broadcast.emit('typing', data);
+    });
+
+});
+
+server.listen('9000',()=>{
     console.log('server started at 9000')
 })

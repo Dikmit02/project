@@ -1,6 +1,7 @@
 const route=require('express').Router()
 const Conversataion=require('../model/conversation')
-// const curruser=require('./user')
+
+const jwt=require('jsonwebtoken')
 
 route.get('/conversation',async(req,res)=>{
     try{
@@ -14,8 +15,14 @@ route.get('/conversation',async(req,res)=>{
 })
 
 route.post('/conversation',async(req,res)=>{
-    const conversation= new Conversataion(req.body)
+  
     try{
+        const token=req.cookies.authtoken
+        const payload= await jwt.verify(token,"diksha")
+        
+        const p= await req.body.members.push(payload._id)
+        
+        const conversation=  new Conversataion(p)
         await conversation.save()
     }
     catch(e){

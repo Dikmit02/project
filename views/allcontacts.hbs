@@ -17,14 +17,39 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+        
     <script src="/src/ajaxrequest.js"></script>
-    <script src="/src/login.js"></script>
+    <script src="/src/allcontacts.js"></script>
+    <script src="/src/chat.js"></script>
+    <link href="/css/chat.css" rel="stylesheet" />
+
     
 </head>
 <body>
     
-    <a href="/logout"><button >Logout</button></a>
-     <ul id="doctors"></ul>
+   <div class="container-fluid" style="background-color: rgb(190, 124, 252);">
+        {{>header}}
+    </div> 
+    <div class="row" style="margin: 30px auto;">
+          <div class="col-sm-4">
+              <ul id="users"></ul>
+          </div>
+          <div id="mario-chat" class="col-sm-6">
+            <h2>Chat</h2>
+            <div id="chat-window">
+                <div id="output"></div>
+                <div id="feedback"></div>
+            </div>
+            <input id="handle" type="text" placeholder="Handle" />
+            <input id="message" type="text" placeholder="Message" />
+            <button id="send">Send</button>
+        </div>
+
+         
+    </div>
+
+    
     
 </body>
 </html>
