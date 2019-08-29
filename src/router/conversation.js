@@ -20,9 +20,10 @@ route.post('/conversation',async(req,res)=>{
         const token=req.cookies.authtoken
         const payload= await jwt.verify(token,"diksha")
         
-        const p= await req.body.members.push(payload._id)
         
-        const conversation=  new Conversataion(p)
+        req.body.members.push(payload._id)
+        
+        const conversation=  new Conversataion(req.body)
         await conversation.save()
     }
     catch(e){

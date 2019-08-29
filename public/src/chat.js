@@ -4,7 +4,7 @@ window.onload = function(){
     
     // Query DOM
     var message = document.getElementById('message'),
-          handle = document.getElementById('handle'),
+        //   handle = document.getElementById('handle'),
           btn = document.getElementById('send'),
           output = document.getElementById('output'),
           feedback = document.getElementById('feedback');
@@ -14,8 +14,8 @@ window.onload = function(){
     // Emit events
     btn.addEventListener('click', function(){
         socket.emit('chat', {
-            message: message.value,
-            handle: handle.value
+            message: message.value
+            // ,handle: handle.value
         });
         message.value = "";
     });
