@@ -2,12 +2,12 @@ const route=require('express').Router()
 const User=require('../model/user')
 const jwt=require('jsonwebtoken')
 const bcrypt=require('bcrypt')
-
+let  userid=0
 
 
 route.get('/user',async(req,res)=>{
    try{
-    const user= await User.find({})
+    const user= await User.find({ _id: { $nin: userid } })
     res.send(user)
    }
    catch(e){
@@ -41,10 +41,10 @@ route.post('/user/login', async (req, res) => {
             if(!isMatch) return res.send({status:false,error:'Wrong password'})
             
 
-            const token=jwt.sign({_id:user._id},"diksha");
+            const token=jwt.sign({_id:user._id},"diksha",{ expiresIn: '7d' },);
             // res.header('auth-token',token).send({status:true})
             res.cookie('authtoken',token,{httpOnly:true})
-            
+            userid=user._id           
             res.send({status:true})
     
         }
@@ -54,45 +54,8 @@ route.post('/user/login', async (req, res) => {
 })
 
 
-route.patch('/user/:id', async (req, res) => {
-    const updates = Object.keys(req.body)
-    const allowedUpdates = ['name','email','password','age','department']
-    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
-
-    if (!isValidOperation) {
-        return res.status(400).send({ error: 'Invalid updates!' })
-    }
-
-    try {
-        const user = await User.findById(req.params.id)
-
-        updates.forEach((update) => user[update] = req.body[update])
-        await user.save()
-
-        if (!user) {
-            return res.status(404).send()
-        }
-
-        res.send(user)
-    } catch (e) {
-        res.status(400).send(e)
-    }
-})
-
-route.delete('/user/:id',async(req,res)=>{
-    try {
-        const user = await User.findByIdAndDelete(req.params.id)
-
-        if (!user) {
-            return res.status(404).send()
-        }
-
-        res.send(user)
-    } catch (e) {
-        res.status(500).send()
-    }
-})
 
 
 
-module.exports=route
+module.exports={route,
+    userid}

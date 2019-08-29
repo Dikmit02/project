@@ -1,22 +1,29 @@
 $(function(){
     let tbl_doctor=$('#doctors')
+    let i=0;
+    let userclick=$('#user')
 
     fetchUser(function (doctors) {
-        tbl_doctor.append(
-            `<tr>
-            <th> bdhgdhj </th>
-            </tr>`
-        )
+        i++;
         for(doctor of doctors){
             tbl_doctor.append(
-                `<tr>
-                <td>${doctor.name}</td>
-                
-            </tr>`
+            `<li class="list-group-item list-group-item-action" id="${doctor._id}">${doctor.name}</li>`
+            // $('<li>').attr('class','list-group-item').attr('class','list-group-item-action').attr('id',`user${i}`).text(`${doctor.name}`)
+
             )
+            i++;
         }
 
     })
+    
+    $('#doctors').on('click','li',function(){
+        let id=$(this).attr('id')
+        
+        
+    })
+    
+    
+    
 
 
     $('form').submit((event)=>{
@@ -33,7 +40,7 @@ $(function(){
                     window.location='http://localhost:9000/signup'
                 }
                 else{
-                   alert("login successfull")
+                   
                    window.location='http://localhost:9000/'
                 }
             })
@@ -46,6 +53,7 @@ $(function(){
     })
     
 })
+
 
 
    
