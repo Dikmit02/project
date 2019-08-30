@@ -43,14 +43,5 @@ route.post('/conversation',async(req,res)=>{
         res.status(500).send(e)
     }
 })
-// route.get('/user/conversation/:idto/:idfrom',async(req,res)=>{
-    
-//     try{
 
-//     }
-//     catch{
-
-//     }
-
-// })
 module.exports=route
