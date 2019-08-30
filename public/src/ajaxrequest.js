@@ -9,9 +9,15 @@ function fetchUser(done){
 function getUserId(member_id){
 
     $.post('/conversation',{
-        members:[member_id]
+        to:member_id
     },function(data){
        
+        done(data)
+    })
+}
+
+function getID(done){
+    $.get('/conversation',function(data){
         done(data)
     })
 }

@@ -1,21 +1,24 @@
+
 // Make connection
 window.onload = function(){
     var socket = io.connect();
     
     // Query DOM
     var message = document.getElementById('message'),
-        //   handle = document.getElementById('handle'),
+          handle = document.getElementById('handle'),
           btn = document.getElementById('send'),
           output = document.getElementById('output'),
           feedback = document.getElementById('feedback');
     
-          
+          getID(function (users){
+            console.log(users)
+        })
     
     // Emit events
     btn.addEventListener('click', function(){
         socket.emit('chat', {
-            message: message.value
-            // ,handle: handle.value
+            message: message.value,
+            handle: handle.value
         });
         message.value = "";
     });
@@ -34,3 +37,5 @@ window.onload = function(){
         feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>';
     });
     }
+
+    

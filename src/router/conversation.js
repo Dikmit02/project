@@ -20,15 +20,21 @@ route.post('/conversation',async(req,res)=>{
         const token=req.cookies.authtoken
         const payload= await jwt.verify(token,"diksha")
         
-        
-        req.body.members.push(payload._id)
-        
-        const conversation=  new Conversataion(req.body)
+        const conversation=  new Conversataion({from:payload._id,to:req.body.to})
         await conversation.save()
     }
     catch(e){
         res.status(500).send(e)
     }
 })
+route.get('/user/conversation/:idto/:idfrom',async(req,res)=>{
+    
+    try{
 
+    }
+    catch{
+
+    }
+
+})
 module.exports=route
