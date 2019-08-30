@@ -21,7 +21,7 @@ route.get('/me',async(req,res)=>{
     res.send(user)
 
     }
-    catch{
+    catch(e){
         res.status(500).send(e)
 
     }

@@ -5,7 +5,7 @@ window.onload = function(){
     
     // Query DOM
     var message = document.getElementById('message'),
-          handle = document.getElementById('handle'),
+         
           btn = document.getElementById('send'),
           output = document.getElementById('output'),
           feedback = document.getElementById('feedback');
@@ -28,11 +28,11 @@ window.onload = function(){
         });
         message.value = "";
     });
-})
+
     message.addEventListener('keypress', function(){
-        socket.emit('typing', handle.value);
+        socket.emit('typing', me[0].name);
     })
-    
+})
     // Listen for events
     socket.on('chat', function(data){
         feedback.innerHTML = '';
