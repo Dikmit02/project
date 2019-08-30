@@ -15,6 +15,28 @@ route.get('/user',async(req,res)=>{
    }
  
 })
+route.get('/me',async(req,res)=>{
+    try{
+    const user= await User.find({ _id:  userid })
+    res.send(user)
+
+    }
+    catch{
+        res.status(500).send(e)
+
+    }
+})
+route.get('/user/:id',async(req,res)=>{
+    const _id = req.params.id
+
+    try{
+        const user=await User.findById(_id)
+        res.send(user)
+    }
+    catch(e){
+        res.status(500).send(e)
+    }
+})
 
 route.post('/register',async(req,res)=>{
     // check if user exist

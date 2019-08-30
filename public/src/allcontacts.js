@@ -18,10 +18,7 @@ $(function(){
     $('#users').on('click','li',function(){
         userclick=$(this).attr('id')
         
-        getUserId(userclick,
-            function(addeduser){
-                window.alert("Addded "+addeduser)
-            })
+        getUserId(userclick)
 
         
         

@@ -13,16 +13,22 @@ window.onload = function(){
           getID(function (users){
             console.log(users)
         })
+        getUserbyId('5d67be338a13353d18375b8b',function(uers){
+            console.log(uers)
+        })
+        me(function(me){
+            console.log(me[0].name)
+        
     
     // Emit events
     btn.addEventListener('click', function(){
         socket.emit('chat', {
             message: message.value,
-            handle: handle.value
+            handle: me[0].name
         });
         message.value = "";
     });
-    
+})
     message.addEventListener('keypress', function(){
         socket.emit('typing', handle.value);
     })
