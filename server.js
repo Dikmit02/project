@@ -42,6 +42,7 @@ app.get('/logout',(req,res)=>{
      res.render('index')
 })
 
+console.log("DIskhaaa")
 
 function verify(req,res,next){
     
@@ -74,8 +75,9 @@ io.on('connection', (socket) => {
 
     // Handle chat event
     socket.on('chat', function(data){
-        
+        console.log(" v dh hbd n"+data)
         io.emit('chat', data);
+        
     });
 
     // Handle typing event

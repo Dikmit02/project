@@ -1,47 +1,74 @@
-
+var gloaluser=""
 // Make connection
-window.onload = function(){
+$(function(){
+  
     var socket = io.connect();
     
     // Query DOM
-    var message = document.getElementById('message'),
-         
-          btn = document.getElementById('send'),
-          output = document.getElementById('output'),
-          feedback = document.getElementById('feedback');
-    
-          getID(function (users){
-            console.log(users)
-        })
-        getUserbyId('5d67be338a13353d18375b8b',function(uers){
-            console.log(uers)
-        })
-        me(function(me){
-            console.log(me[0].name)
+    var message = $('#message'),
+        btn = $('#send'),
+      output = $('#output'),
+          feedback = $('#feedback');
+          tbl_user=$('#users')
+          
+           
         
+          fetchUser(function (users) {
+        
+            for(user of users){
+                tbl_user.append(
+                `<li class="list-group-item list-group-item-action" id="${user._id}">${user.name}</li>`
+                // $('<li>').attr('class','list-group-item').attr('class','list-group-item-action').attr('id',`user${i}`).text(`${user.name}`)
     
+                )
+                
+            }
+    
+        })
+        
+        $('#users').on('click','li',function(){
+             userclick=$(this).attr('id') 
+             
+            getUserId(userclick,"Hii")  
+            gloaluser=userclick
+                
+        })
+
+
+     me(function(me){
+     
     // Emit events
-    btn.addEventListener('click', function(){
+    btn.click(function(){
+       
         socket.emit('chat', {
-            message: message.value,
-            handle: me[0].name
+            message: message.val(),
+            handle: me[0].name 
         });
+          
+            gettofrom(userclick,me[0]._id)
+
+
         message.value = "";
     });
 
-    message.addEventListener('keypress', function(){
+    message.keypress(function(){
         socket.emit('typing', me[0].name);
     })
 })
     // Listen for events
     socket.on('chat', function(data){
-        feedback.innerHTML = '';
-        output.innerHTML += '<p><strong>' + data.handle + ': </strong>' + data.message + '</p>';
+        feedback.html('')
+        output.append('<p><strong>' + data.handle + ': </strong>' + data.message + '</p>')
     });
     
     socket.on('typing', function(data){
-        feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>';
+        feedback.html('<p><em>' + data + ' is typing a message...</em></p>')
     });
-    }
+
+
+
+
+
+    })
 
     

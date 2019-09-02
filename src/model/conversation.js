@@ -10,13 +10,20 @@ const ConversationSchema=new mongoose.Schema({
         type:String,
         required:false
     },
-    datetime:{
-        type:Date,
-        default: Date.now,
-    },
-    message:{
-        type:[String]
-    }
+    // message:{
+    //     type:[String]
+    // }
+    record:[
+       {
+            to:String,
+            message:[String],
+            datetime:{
+                type:Date,
+                default:Date.now
+            }
+        }
+        
+    ]
     
 
     

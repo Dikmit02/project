@@ -6,10 +6,11 @@ function fetchUser(done){
 }
 
 
-function getUserId(member_id){
+function getUserId(member_id,message){
 
     $.post('/conversation',{
-        to:member_id
+        to:member_id,
+        message:message
     })
 }
 
@@ -19,14 +20,18 @@ function getID(done){
     })
 }
 
-function getUserbyId(user_id,done){
-    $.get('/user/'+user_id,function(data){
-        done(data)
-    })
-}
+// function getUserbyId(user_id,done){
+//     $.get('/user/'+user_id,function(data){
+//         done(data)
+//     })
+// }
 
 function me(done){
     $.get('/me',function(data){
         done(data)
     })
+}
+
+function gettofrom(to,from){
+    $.post('/conversation/'+to+'/'+from)
 }
