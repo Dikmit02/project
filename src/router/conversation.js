@@ -16,20 +16,20 @@ route.post('/conversation',async(req,res)=>{
      
         if(ifalreadyexists||ifalreadyexists_2){
             if(ifalreadyexists!==null){
-                return res.send(ifalreadyexists)
+                return res.send({_id:ifalreadyexists._id})
             }
           
             if(ifalreadyexists_2!==null){
-                return res.send(ifalreadyexists_2)
+                return res.send({_id:ifalreadyexists_2._id})
             }
             
         }
         else{
             const conversation=  new Conversataion({from:payload._id,to:req.body.to})
-        await conversation.save(function(err,result){
+            await conversation.save(function(err,result){
            
-            res.send({_id:result._id})
-        })
+                res.send({_id:result._id})
+            })
         }
         
          

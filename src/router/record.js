@@ -15,9 +15,18 @@ route.post('/record/:id',async(req,res)=>{
 route.post('/record',async(req,res)=>{
    
     try{
- 
-        const record=await new Record({_id:req.body._id})
-        await record.save()
+        const ifalreadyexists=await Record.findById({_id:req.body._id},{_id:1})
+        if(ifalreadyexists){
+            return res.send(ifalreadyexists)
+        }
+        else{
+            const record=await new Record({_id:req.body._id})
+            await record.save(function(err,result){
+               
+                res.send({_id:result._id})
+            })
+        }
+        
     }
     catch(e){
         res.status(500).send(e)

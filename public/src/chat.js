@@ -1,4 +1,5 @@
 var gloaluser=""
+var global_id=""
 // Make connection
 $(function(){
   
@@ -31,12 +32,11 @@ $(function(){
              
         
             $.post('/conversation',{to:userclick},(data)=>{
-                // getting unique id
-                record(data._id)
+               record(data._id)
             })
            
             gloaluser=userclick
-            console.log("userclick "+userclick)
+         
                 
         })
 
@@ -50,10 +50,8 @@ $(function(){
             message: message.val(),
             handle: me[0].name 
         });
-          console.log("gloval "+gloaluser)
+      
             gettofrom(gloaluser,me[0]._id)
-
-           
 
 
         message.value = "";

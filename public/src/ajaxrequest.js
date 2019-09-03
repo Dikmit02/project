@@ -38,9 +38,13 @@ function gettofrom(to,from,message,done){
 }
 
 function record(id){
-    console.log("inside log "+id)
-    $.post('/record',{
-       
-        _id:id
+    $.post('/record',{_id:id},(data)=>{
+
+        console.log(data._id)
     })
+   
+}
+
+function record_id(id){
+    $.post('/record/'+id)
 }
