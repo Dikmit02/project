@@ -27,9 +27,12 @@ $(function(){
         })
         
         $('#users').on('click','li',function(){
-             userclick=$(this).attr('id') 
+            userclick=$(this).attr('id') 
              
-            getUserId(userclick,"Hii")  
+            getUserId(userclick)
+            // getID(userclick)
+           
+           
             gloaluser=userclick
                 
         })
@@ -46,6 +49,8 @@ $(function(){
         });
           
             gettofrom(userclick,me[0]._id)
+
+           
 
 
         message.value = "";

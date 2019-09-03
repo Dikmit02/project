@@ -1,7 +1,12 @@
 const mongoose=require('mongoose')
-
+const shortid = require('shortid');
 const ConversationSchema=new mongoose.Schema({
- 
+    
+    _id: {
+        'type': String,
+        'default': shortid.generate
+      },
+
     to:{
         type:String,
         required:false
@@ -9,21 +14,9 @@ const ConversationSchema=new mongoose.Schema({
     from:{
         type:String,
         required:false
-    },
-    // message:{
-    //     type:[String]
-    // }
-    record:[
-       {
-            to:String,
-            message:[String],
-            datetime:{
-                type:Date,
-                default:Date.now
-            }
-        }
-        
-    ]
+    }
+    
+  
     
 
     

@@ -14,6 +14,7 @@ const io=socketio(server)
 
 const UserRoute=require('./src/router/user')
 const ConversationRoute=require('./src/router/conversation')
+const RecordRoute=require('./src/router/record')
 
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
@@ -25,6 +26,7 @@ hbs.registerPartials(path.join(__dirname,'/partials'))
 
 app.use(UserRoute.route)
 app.use(ConversationRoute)
+app.use(RecordRoute)
 
 app.use('/',express.static(path.join(__dirname,'/public')))
 
@@ -42,7 +44,7 @@ app.get('/logout',(req,res)=>{
      res.render('index')
 })
 
-console.log("DIskhaaa")
+
 
 function verify(req,res,next){
     
@@ -75,7 +77,7 @@ io.on('connection', (socket) => {
 
     // Handle chat event
     socket.on('chat', function(data){
-        console.log(" v dh hbd n"+data)
+        
         io.emit('chat', data);
         
     });
