@@ -15,7 +15,8 @@ route.post('/record/:id',async(req,res)=>{
 route.post('/record',async(req,res)=>{
    
     try{
-        const record=await new Record({_id:'4519'})
+ 
+        const record=await new Record({_id:req.body._id})
         await record.save()
     }
     catch(e){

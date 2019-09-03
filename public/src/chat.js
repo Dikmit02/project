@@ -29,11 +29,14 @@ $(function(){
         $('#users').on('click','li',function(){
             userclick=$(this).attr('id') 
              
-            getUserId(userclick)
-            // getID(userclick)
-           
+        
+            $.post('/conversation',{to:userclick},(data)=>{
+                // getting unique id
+                record(data._id)
+            })
            
             gloaluser=userclick
+            console.log("userclick "+userclick)
                 
         })
 
@@ -47,8 +50,8 @@ $(function(){
             message: message.val(),
             handle: me[0].name 
         });
-          
-            gettofrom(userclick,me[0]._id)
+          console.log("gloval "+gloaluser)
+            gettofrom(gloaluser,me[0]._id)
 
            
 

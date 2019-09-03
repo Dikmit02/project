@@ -6,14 +6,14 @@ function fetchUser(done){
 }
 
 
-function getUserId(member_id){
+// function getUserId(member_id){
     
-    $.post('/conversation',{to:member_id},(data)=>{
-        // getting unique id
-        console.log(data._id)
-    })
+//     $.post('/conversation',{to:member_id},(data)=>{
+//         // getting unique id
+//         console.log(data._id)
+//     })
    
-}
+// }
 
 // function getID(done){
 //     $.get('/conversation',function(data){
@@ -35,4 +35,12 @@ function me(done){
 
 function gettofrom(to,from,message,done){
     $.post('/conversation/'+to+'/'+from)
+}
+
+function record(id){
+    console.log("inside log "+id)
+    $.post('/record',{
+       
+        _id:id
+    })
 }
