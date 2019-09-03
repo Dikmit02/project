@@ -38,13 +38,16 @@ function gettofrom(to,from,message,done){
 }
 
 function record(id){
-    $.post('/record',{_id:id},(data)=>{
-
-        console.log(data._id)
-    })
-   
+    $.post('/record',{_id:id})
+  
 }
 
-function record_id(id){
-    $.post('/record/'+id)
+function record_id(id,to ,from,message){
+   
+    $.post('/record/'+id,{
+        to:to,
+        from:from,
+        message:message
+    })
+    
 }

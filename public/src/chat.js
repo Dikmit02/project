@@ -33,6 +33,7 @@ $(function(){
         
             $.post('/conversation',{to:userclick},(data)=>{
                record(data._id)
+               diksha(data._id)
             })
            
             gloaluser=userclick
@@ -40,8 +41,8 @@ $(function(){
                 
         })
 
-
-     me(function(me){
+        function diksha(ans){
+        me(function(me){
      
     // Emit events
     btn.click(function(){
@@ -50,9 +51,10 @@ $(function(){
             message: message.val(),
             handle: me[0].name 
         });
-      
-            gettofrom(gloaluser,me[0]._id)
+            
+            console.log("me "+JSON.stringify(me))
 
+            record_id(ans,gloaluser,me[0]._id,message.val())
 
         message.value = "";
     });
@@ -61,6 +63,8 @@ $(function(){
         socket.emit('typing', me[0].name);
     })
 })
+
+        }
     // Listen for events
     socket.on('chat', function(data){
         feedback.html('')

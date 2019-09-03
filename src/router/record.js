@@ -4,8 +4,8 @@ const Record=require('../model/record')
 route.post('/record/:id',async(req,res)=>{
     const id=req.params.id
     try{
-        const record=await Record.updateOne({_id:id},{$push:{record:{to:"klmklbvmn",from:"mlhmnlk",message:"mkbmklg"}}})
-        await record.save()
+        const record=await Record.updateOne({_id:id},{$push:{record:{to:req.body.to,from:req.body.from,message:req.body.message}}})
+        await record.save().send(req.body)
     }
     catch(e){
         res.status(500).send(e)
